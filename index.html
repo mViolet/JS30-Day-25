@@ -1,3 +1,5 @@
+<!--another codealong with Wes -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +14,8 @@
       </div>
     </div>
   </div>
+
+  <button>Test button</button>
 
 <style>
   html {
@@ -38,10 +42,33 @@
   .three {
     background: coral;
   }
+
+  button {
+    margin-top: 10px;
+    padding: 5px;
+  }
 </style>
 
-<button></button>
 <script>
+
+const divs = document.querySelectorAll('div');
+const button = document.querySelector('button');
+
+function logText(e) {
+  console.log(this.classList.value);
+  // e.stopPropagation(); //stops bubbling the event up to other elements that wrap around it (as long as capture is false/default)!!!
+}
+
+button.addEventListener('click', () => {
+  console.log('%c click!', 'color: red; font-weight: bold; font-size: 15px;');
+}, {
+  once: true    // options argument to unbind the click listener. fires once - used for things like store checkout
+});
+
+divs.forEach(div => div.addEventListener('click', logText, {  //start of options arguments
+  capture: false,  //runs the capture on the way Up to the last element. default
+  once: true //listens for a click ONCE & then unbinds itself
+}));
 
 </script>
 </body>
